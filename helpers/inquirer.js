@@ -40,6 +40,7 @@ const menuOpts = [
   },
 ];
 
+//funcion para mostrar el menu de opciones , esta lee el array de objetos "menuOpts"
 const inquirerMenu = async () => {
   //   console.clear();
   console.log("=========================".blue);
