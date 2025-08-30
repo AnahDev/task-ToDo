@@ -33,11 +33,15 @@ const main = async () => {
         tareas.crearTarea(desc);
         break;
       case "2":
-        console.log(tareas.listadoArr);
+        // console.log(tareas.listadoArr);
+        tareas.listadoCompleto();
         break;
       case "3": //listar tareas completadas
+        tareas.listarCompletadasTrue(true);
         break;
       case "4": //listar tareas pendientes
+        tareas.listarCompletadasTrue(false);
+
         break;
       case "5": //completar tarea
         break;
