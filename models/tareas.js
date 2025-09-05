@@ -20,6 +20,12 @@ class Tareas {
     this._listado = {};
   }
 
+  borrarTarea(id = "") {
+    if (this._listado[id]) {
+      delete this._listado[id];
+    }
+  }
+
   crearTarea(desc = "") {
     const tarea = new Tarea(desc);
     this._listado[tarea.id] = tarea;
@@ -42,7 +48,7 @@ class Tareas {
 
   listarCompletadasTrue(completadas = true) {
     let contador = 0;
-    this.listadoArr.forEach((tarea, index) => {
+    this.listadoArr.forEach((tarea) => {
       const { desc, completadoEn } = tarea;
       const estado = completadoEn ? "Completada".green : "Pendiente".red;
 
@@ -50,7 +56,7 @@ class Tareas {
         if (completadoEn) {
           contador += 1;
           console.log();
-          console.log(`${contador + "."} ${desc} :: ${completadoEn}`);
+          console.log(`${contador + "."} ${desc} :: ${completadoEn.green}`);
         }
       } else {
         if (!completadoEn) {
@@ -58,6 +64,23 @@ class Tareas {
           console.log();
           console.log(`${contador + "."} ${desc} :: ${estado}`);
         }
+      }
+    });
+  }
+
+  toggleCompletadas(ids = []) {
+    ids.forEach((id) => {
+      const tarea = this._listado[id];
+      if (!tarea.completadoEn) {
+        tarea.completadoEn = new Date().toISOString();
+      }
+    });
+
+    //parra barrer los ids , si des seleciono una tarea que esta completada
+
+    this.listadoArr.forEach((tarea) => {
+      if (!ids.includes(tarea.id)) {
+        this._listado[tarea.id].completadoEn = null;
       }
     });
   }
